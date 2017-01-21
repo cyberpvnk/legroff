@@ -118,6 +118,7 @@ fi
 
 # BASH
 alias '.b'='source ~/.bashrc'
+alias 'hf'='history | grep'
 alias vibash='vim ~/.bashrc'
 alias viconf='vim ~/.ssh/config'
 

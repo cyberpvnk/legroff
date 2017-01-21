@@ -7,3 +7,24 @@ git/
 .cache/
 .xsession-errors .xsession-errors.old
 .vboxclient-clipboard.pid .vboxclient-display.pid .vboxclient-draganddrop.pid .vboxclient-hostversion.pid .vboxclient-seamless.pid
+.bashrc
+.config/
+.dbus/
+.dmrc
+.gitconfig
+.local/
+.macromedia/
+.mozilla/
+.npm/
+.profile
+.rpmdb/
+.sudo_as_admin_successful
+.vboxclient-clipboard.pid
+.vboxclient-display.pid
+.vboxclient-draganddrop.pid
+.vboxclient-hostversion.pid
+.vboxclient-seamless.pid
+.viminfo
+.xsession-errors
+.xsession-errors.old
+examples.desktop
