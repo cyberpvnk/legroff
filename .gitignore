@@ -1,0 +1,9 @@
+.bash_history
+.ssh/
+Downloads/
+git/
+.ICEauthority
+.Xauthority
+.cache/
+.xsession-errors .xsession-errors.old
+.vboxclient-clipboard.pid .vboxclient-display.pid .vboxclient-draganddrop.pid .vboxclient-hostversion.pid .vboxclient-seamless.pid
