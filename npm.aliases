@@ -1,0 +1,1 @@
+alias 'start-pc'="export PORT=3001&& react-scripts start"

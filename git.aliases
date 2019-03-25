@@ -1,0 +1,22 @@
+alias gs="git status -s "
+alias gb="unset git_branch; export git_branch=\`git branch  | grep '\*' | awk '{print \$2}'\` ; echo \$git_branch"
+alias gss="git status -s | awk '{ print \$2 }' "
+alias gc='git commit -m '
+alias mergetool='/usr/bin/git mergetool '
+#alias dt='yes | /usr/bin/git difftool '
+alias dt='/usr/bin/git difftool '
+alias difftool='/usr/bin/git difftool '
+alias mt='/usr/bin/git mergetool '
+alias gl="git log \-\-pretty | grep -e commit -e Author | head -10 | sed s/\>/\>\\\n/g | grep -E '^|commit|Author' "
+alias gll="git log \-\-pretty | grep -e commit -e Author |            sed s/\>/\>\\\n/g | grep -E '^|commit|Author' "
+alias po='git push origin'
+alias grv="git remote -v | grep fetch | awk '{print \$2}'"
+alias gr="export git_remote=\`grv\`; echo \$git_remote"
+alias gbawk="git branch | awk '{print \$2}'"
+function git_add_all {
+        for file in `gss`
+          do
+            echo $file;
+            git add $file;
+          done
+}

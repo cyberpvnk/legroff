@@ -1,0 +1,5 @@
+#alias g='/cygdrive/c/Users/groff.laird/Programs/scoop/shims/gradle'
+alias clean='gradle clean'
+alias build='gradle build'
+alias make='gradle clean build'
+alias bootRun='gradle bootRun | tee .bootRun.out'

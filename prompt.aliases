@@ -1,0 +1,58 @@
+function elite
+{
+
+local GRAY="\[\033[1;30m\]"
+local LIGHT_GRAY="\[\033[0;37m\]"
+local CYAN="\[\033[0;36m\]"
+local LIGHT_CYAN="\[\033[1;36m\]"
+local NO_COLOUR="\[\033[0m\]"
+
+case $TERM in
+    xterm*|rxvt*)
+        local TITLEBAR='\[\033]0;\u@\h:\w\007\]'
+        ;;
+    *)
+        local TITLEBAR=""
+        ;;
+esac
+PS1="$TITLEBAR\
+$GRAY-$CYAN-$LIGHT_CYAN(\
+$CYAN\u$GRAY@$CYAN\h\
+$LIGHT_CYAN) \
+\
+$CYAN-$LIGHT_CYAN(\
+$CYAN${EXIT}\
+$LIGHT_CYAN)\
+\
+$CYAN-$LIGHT_CYAN(\
+$CYAN\$_git_modified_count_\
+$LIGHT_CYAN)$CYAN-$GRAY-\
+$LIGHT_GRAY\n\
+\
+$GRAY-$CYAN-$LIGHT_CYAN(\
+$CYAN\$$GRAY:$CYAN\w\
+$LIGHT_CYAN)$CYAN-$GRAY-$LIGHT_GRAY " 
+PS2="$LIGHT_CYAN-$CYAN-$GRAY-$NO_COLOUR "
+}
+
+#function prompt_function {
+#        export EXIT="$?"             # This needs to be first
+#        #echo $EXIT
+#        history -a;
+#        history -c;
+#        history -r;
+#        #if [ -d .git ]; then
+#        #       export _git_modified_count_=`gss | wc -l`;
+#        #else
+#        #       export _git_modified_count_=
+#        #       #echo "not in a git repo"
+#        #fi
+#}
+#PROMPT_COMMAND='prompt_function'
+
+
+
+#$CYAN\$(date +%H%M)$GRAY/$CYAN\$(date +%d-%b-%y)\
+
+
+elite

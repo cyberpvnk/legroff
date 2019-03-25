@@ -1,0 +1,26 @@
+export basedir="/cygdrive/c/Users/groff.laird/Programs/node-v10.14.1-win-x64/node_modules/@expo/ngrok"
+# ENVIRONMENT cdable_vars
+export git="$HOME/git"
+export doc="$HOME/Documents"
+export downloads="$HOME/Downloads"
+export programs="$HOME/Programs"
+export aliases="$HOME/.aliases"
+export yaml="$git/yamls"
+
+
+#workspaces
+export m2=$HOME/.m2
+export cloud=$git/cloudstorage-master/frontend
+export shopify=$git/shopify
+export poc=$git/poc_react_app
+export common=$git/ihs-core-common
+export model=$git/ihs-core-model
+export customer=$git/ihs-customer-manager
+export order=$git/ihs-order-management
+export product=$git/ihs-product-catalog
+export lowes=$git/sb-lowes-jobs
+export properties=$git/dish_properties
+export gw=$git/ihs-api-gateway
+export kbh=$git/kbh-file-movement-job
+export asurion=$git/sb-asurion-jobs
+export junk=${HOME}/junk
