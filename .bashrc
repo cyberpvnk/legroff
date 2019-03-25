@@ -1,3 +1,7 @@
+export DISPLAY=":0.0"
+
+#xrdb -merge ~/.Xresources
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -10,14 +14,16 @@ esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+shopt -s histappend cdable_vars
+HISTSIZE=
+HISTFILESIZE=
+#HISTTIMEFORMAT='%F %T '
+#HISTCONTROL=ignoreboth
+HISTCONTROL=ignoredups:erasedups
+alias h=history
 
-# append to the history file, don't overwrite it
-shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -26,6 +32,11 @@ shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 #shopt -s globstar
+
+#export PATH=/usr/bin:$PATH
+
+
+
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -88,9 +99,12 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
+alias ll='ls -al'
+alias la='ls -a'
 alias l='ls -CF'
+alias lls='/usr/bin/find ./ -type f'
+alias f='/usr/bin/find '
+alias lr='ls -R'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -101,8 +115,16 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -d ~/.aliases ]; then
+    for file in `ls ~/.aliases/*.aliases`; do
+        . $file
+    done
+fi
+
+if [ -d ~/.completion ]; then
+    for file in `ls -1 ${HOME}/.completion/*.bash`; do
+      . $file
+    done
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -118,15 +140,51 @@ fi
 
 # BASH
 alias '.b'='source ~/.bashrc'
-alias 'hf'='history | grep'
+alias 'hf'='history | grep '
 alias vibash='vim ~/.bashrc'
 alias viconf='vim ~/.ssh/config'
 
-# GIT
-alias gs='git status'
-alias gc='git commit -m "."'
-alias po='git push origin'
-alias gr='git remote'
-alias gb='git branchk'
+chdir() {
+    local action="$1"; shift
+    case "$action" in
+        # popd needs special care not to pass empty string instead of no args
+        popd) [[ $# -eq 0 ]] && builtin popd || builtin popd "$*" ;;
+        cd|pushd) builtin $action "$*" ;;
+        *) return ;;
+    esac
+    # now do stuff in the new pwd
+
+    if [ -d .git ]; then
+        export _git_modified_count_=`gss | wc -l`;
+        else
+        export _git_modified_count_=
+        #echo "not in a git repo"
+    fi
+    #echo Your last 3 modified files:
+    #ls -t | head -n 3
+}
+
+
+
+function prompt_function {
+	export EXIT="$?"             # This needs to be first
+        
+	history -a; 
+	history -c; 
+	history -r;
+	#if [ -d .git ]; then
+	#	export _git_modified_count_=`gss | wc -l`;
+	#else
+	#	export _git_modified_count_=
+	#	#echo "not in a git repo"
+	#fi
+}
+PROMPT_COMMAND='prompt_function'
+
+
+
+#alias gb="export _git_branch_=`gbawk`;  echo \$_git_branch_"
 # CLONE 
 alias 'clone-legroff'='git clone git@github.com:cyberpvnk/legroff.git'
+
+
